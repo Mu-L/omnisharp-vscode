@@ -8,6 +8,11 @@
 
 See [OmniSharp Options](https://github.com/OmniSharp/omnisharp-vscode/blob/master/test-plan.md#omnisharpusemodernnet-all-platforms) for more details.
 
+### Validation
+
+#### Platforms
+All the validations below should be performed on both Windows and at least one Unix platform (MacOS, Linux).  These can be done on x64 versions unless there are ARM specific changes to validate.
+
 #### Opening projects
 When you open a directory in VS Code, the C# extension should look for a .csproj, .sln, or .slnf file in that directory and use "OmniSharp" to load it. If a .cs file is present and no .csproj, .sln, or .slnf file are present, Omnisharp should start but the intellisense should only appear when a change is made to the file.
 If you look in "Output > Omnisharp Log" a bunch of information should be printed about what copy of MSBuild was used and what projects were load
@@ -154,7 +159,7 @@ void Foo(){
 ```
 
 ##### C# Diagnostics
-* Typing `@ThisDoesNotExist` results in an error being created and squiggled in the .cshtml file. NOTE: This error squiggly will be misaligned due to known issues.
+* Typing `@ThisDoesNotExist` results in an error being created and squiggled in the .cshtml file.
 
 ##### TagHelper Quick Info
 * Typing `<environment></environment>` then hovering the mouse over the opening tag results in a window about that TagHelper that should read something like `EnvironmentTagHelper ITagHelper implementation targeting <environment> elements that conditionally renders content based on the current value of IHostingEnvironment.EnvironmentName...`.
@@ -211,7 +216,7 @@ To setup a test project to verify on you can do:
 * Typing `@layout MainLayout` prompts for completion for the `layout` symbol and the `MainLayout` symbol.
 
 ##### C# Signature Help
-* Typing `@SetParameters()` prompts for signature help inside of the `()`.
+* Typing `@SetParametersAsync()` prompts for signature help inside of the `()`.
 
 ##### C# Rename
 * Renaming "someVariable" in `@{var someVariable = true;} @someVariable` results in both locations being changed.
@@ -241,6 +246,12 @@ To setup a test project to verify on you can do:
 ##### C# Diagnostics
 * When no changes have been performed on `Pages/Index.cshtml`, there are 0 errors.
 * Typing `@ThisDoesNotExist` results in an error being created and squiggled in the .cshtml file.
+
+##### HTML Document Color and Color Presentation
+* Specifying a color name should display the color itself. Hovering over the color should display a color picker.
+```HTML
+<h1 style="background-color:blue"></h1>
+```
 
 ##### Debugging with blazorwasm debug adapter
 
